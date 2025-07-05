@@ -7,7 +7,7 @@
     "build": "parcel build index.html",
     "test": "jest",
     "proxy": "node server.js",
-    "vercel-build": "parcel build index.html"
+    "vercel-build": "parcel build index.html --no-source-maps"
   },
   "author": "Shubhranshu Pandey",
   "license": "ISC",
