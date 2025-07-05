@@ -20,7 +20,7 @@ class UserClass extends React.Component {
 
     // Here we call the API
     try {
-      const data = await fetch(GITHUB_API.USER("GouravSittam"));
+      const data = await fetch(GITHUB_API.USER("shubhranshu-pandey"));
       const json = await data.json(); // Await the json() method
 
       // Update user data
