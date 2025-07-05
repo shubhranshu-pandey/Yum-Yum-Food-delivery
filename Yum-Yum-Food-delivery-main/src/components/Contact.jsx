@@ -16,12 +16,35 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log('Form submitted:', formData);
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/movwzjkd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -106,10 +129,28 @@ const Contact = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-pink-600 text-white py-3 rounded-lg hover:bg-pink-400 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+                disabled={isSubmitting}
+                className={`w-full py-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-pink-600 hover:bg-pink-400'
+                } text-white`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                  ✅ Thank you! Your message has been sent successfully.
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                  ❌ Sorry, there was an error sending your message. Please try again.
+                </div>
+              )}
             </form>
           </div>
         </div>
