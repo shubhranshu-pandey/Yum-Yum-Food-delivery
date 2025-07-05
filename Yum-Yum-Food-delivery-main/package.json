@@ -7,12 +7,13 @@
     "build": "parcel build index.html",
     "test": "jest",
     "proxy": "node server.js",
-    "vercel-build": "parcel build index.html --no-source-maps"
+    "vercel-build": "parcel build index.html --no-source-maps --no-cache"
   },
   "author": "Shubhranshu Pandey",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.3.11",
+    "autoprefixer": "^10.4.21",
     "parcel": "^2.12.0",
     "postcss": "^8.4.47",
     "prettier": "3.3.3",

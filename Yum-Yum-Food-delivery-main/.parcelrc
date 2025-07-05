@@ -1,13 +1,3 @@
 {
-  "extends": "@parcel/config-default",
-  "transformers": {
-    "*.{js,mjs,jsx,cjs,ts,tsx}": ["@parcel/transformer-js"],
-    "*.{css,scss}": ["@parcel/transformer-css"]
-  },
-  "resolvers": ["@parcel/resolver-default"],
-  "optimizers": {
-    "*.{js,mjs,jsx,cjs,ts,tsx}": ["@parcel/optimizer-terser"],
-    "*.{css,scss}": ["@parcel/optimizer-css"]
-  },
-  "reporters": ["@parcel/reporter-cli"]
+  "extends": "@parcel/config-default"
 } 
